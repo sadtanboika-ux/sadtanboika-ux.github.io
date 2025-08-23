@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>รายละเอียดสินค้า</title>
+  <style>
+  body {
+    transform: rotateY(90deg);
+    opacity: 0;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+  }
+
+  body.flip-in {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+  </style>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-image: url('img/Big.png');
+      background-size: cover;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .image-gallery {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .image-gallery img {
+      width: 60%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .thumb {
+      width: 60%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border 0.2s;
+    }
+
+    .thumb:hover {
+      border: 2px solid #000;
+    }
+
+    .product-info {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .product-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-sub {
+      color: #777;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-price {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 1rem;
+    }
+
+    .product-description {
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .size-chart h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .size-chart table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .size-chart th, .size-chart td {
+      border: 1px solid #000000;
+      padding: 8px;
+    }
+
+    .size-chart th {
+      background-color: #b2b2b2;
+    }
+
+    .back-btn, .buy-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      margin-right: 1rem;
+      padding: 0.6rem 1.2rem;
+      background-color: #000;
+      color: #ffffff;
+      text-decoration: none;
+      border: 2px solid #000000;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .back-btn:hover, .buy-btn:hover {
+      background-color: #222;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- ✅ แกลเลอรีรูปภาพ (จะอัปเดตโดย JS) -->
+    <div class="image-gallery">
+      <img id="product-img-main" src="img/default.png" alt="สินค้าหลัก">
+    </div>
+
+    <!-- ✅ ข้อมูลสินค้า -->
+    <div class="product-info">
+      <div class="product-name" id="product-name">Loading...</div>
+      <div class="product-sub">Pre-order</div>
+      <div class="product-price" id="product-price">฿ 0</div>
+
+      <div class="product-description" id="product-description">
+        กำลังโหลดรายละเอียดสินค้า...
+      </div>
+
+      <!-- ✅ ตารางไซต์ (อัปเดตโดย JS) -->
+      <div class="size-chart">
+        <h3>ตารางไซต์เสื้อ</h3>
+        <table></table>
+      </div>
+
+      <!-- ✅ ปุ่ม -->
+      <a href="index.html" class="back-btn">← กลับหน้าร้าน</a>
+      <a id="buy-button" class="buy-btn">🛒 สั่งซื้อสินค้า</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("flip-in");
+  });
+  </script>
+
+</body>
+</html>

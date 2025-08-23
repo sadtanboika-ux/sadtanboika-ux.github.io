@@ -1,0 +1,153 @@
+body {
+
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  background-image: url('img/Big.png');
+  background-size: cover;
+  background-position: center;
+}
+
+header {
+  text-align: center;
+  padding: 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* ส่วนการ์ดสินค้า */
+
+.product-section{
+  display: flex;
+  justify-content: flex-start;
+  padding: 2rem 1rem 2rem 5rem;
+  background-color: #ffffff00;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  padding: 2rem;
+  background-color: #f5f5f500;
+
+}
+
+.product-section .slider{
+  position: absolute;
+  width: 200px;
+  height: 250px;
+  top: 10%;
+  left: calc(50% - 100px);
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  animation: autoRun 20s linear infinite;
+}
+@keyframes autoRun{
+    from{
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }to{
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
+
+}
+.product-section .slider .item{
+  position: absolute;
+  inset: 0 0 0 0;
+  transform:
+      rotateY(calc( (var(--position) - 1) *(360 / var(--quantity)) * 1deg))
+      transform: translateZ(550px);
+}
+.product-section .slider .item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card {
+  width: 260px;
+  background-color: rgba(255, 255, 255, 0.941);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1rem;
+  text-align: left;
+  text-decoration: none;
+  color: black;
+  position: relative;
+  font-family: 'sans-serif';
+  overflow: hidden;
+  position: relative;
+}
+
+.product-rank {
+  display: none;
+  font-size: 1rem;
+  color: #555;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.product-name {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-sub {
+  font-size: 0.75rem;
+  color: #777;
+  margin-bottom: 0.2rem;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.heart {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1.2rem;
+  color: #888;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: #ffffff;
+}
+
+.back-btn,
+.buy-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  margin-right: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #000;
+  color: #ffffff;
+  text-decoration: none;     /* ❗ เอาเส้นใต้ลิงก์ออก */
+  border: 2px solid #000000;    /* ✅ กรอบดำ */
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.back-btn:hover,
+.buy-btn:hover {
+  background-color: #000000;
+}

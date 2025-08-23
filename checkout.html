@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - สั่งซื้อสินค้า</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+      background-image: url('img/Big.png');
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    textarea[readonly] {
+      background-color: #f0f0f0;
+    }
+
+    button {
+      background-color: #000;
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #222;
+    }
+
+    .preview {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .preview img {
+      max-width: 200px;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>แบบฟอร์มสั่งซื้อสินค้า</h2>
+
+    <!-- แสดงภาพสินค้า -->
+    <div class="preview" id="product-image-preview"></div>
+
+    <form id="checkout-form">
+      <label>รายการสินค้าที่จะซื้อ</label>
+      <textarea name="product" id="product" rows="2" readonly required></textarea>
+
+      <label>จำนวนที่ต้องการสั่งซื้อ</label>
+      <input type="number" name="quantity" id="quantity" min="1" value="1" required />
+
+      <label>ชื่อ-นามสกุล</label>
+      <input type="text" name="name" required />
+
+      <label>เบอร์โทรศัพท์</label>
+      <input type="tel" name="phone" required />
+
+      <label>อีเมล</label>
+      <input type="email" name="email" required />
+
+      <label>ที่อยู่สำหรับจัดส่ง</label>
+      <textarea name="address" rows="4" required></textarea>
+
+      <label>ไซต์เสื้อ</label>
+      <select name="size" required>
+        <option value="">-- กรุณาเลือกไซต์ --</option>
+        <option value="XS">XL</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        
+      </select>
+
+      <div class="preview" style="text-align:center;">
+      <img src="img/Bank account .PNG" style="max-width: 300px;"/>
+
+
+      <label>แนบหลักฐานการโอนเงิน</label>
+      <input type="file" name="proof" id="proof" accept="image/*" required />
+
+      <div class="preview">
+        <img id="preview-img" src="#" alt="" style="display:none;">
+      </div>
+
+      <button type="submit">ยืนยันการสั่งซื้อ</button>
+    </form>
+  </div>
+
+  <script>
+    // แสดงรูป preview
+    document.getElementById('proof').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById('preview-img');
+          img.src = e.target.result;
+          img.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // โหลดข้อมูลจาก product.html (name, img)
+    window.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("name");
+      const img = params.get("img");
+
+      if (name) {
+        document.getElementById("product").value = name;
+      }
+
+      if (img) {
+        const imgTag = document.createElement("img");
+        imgTag.src = `img/${img}`;
+        imgTag.alt = name;
+        imgTag.style.maxWidth = "30%";
+        imgTag.style.borderRadius = "10px";
+        document.getElementById("product-image-preview").appendChild(imgTag);
+      }
+    });
+
+    // เมื่อส่งฟอร์ม
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const file = document.getElementById("proof").files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = function() {
+        const base64Image = reader.result;
+
+        const data = new FormData(form);
+        data.set("proof", base64Image); // ส่ง base64 ไปยัง GAS
+
+        fetch('https://script.google.com/macros/s/AKfycbyhG4aWJ9Xg7kKXfyoISDMhJUCXXTLGR_RDoP3TR_sVi0u0q_Qig0Hu46Hepedpt9YDVg/exec', { // <== แก้ไขเป็น URL ของคุณเอง
+          method: 'POST',
+          body: data
+        })
+        .then(res => res.text())
+        .then(response => {
+          window.location.href = 'thankyou.html';
+        })
+        .catch(err => {
+          alert("เกิดข้อผิดพลาด: " + err.message);
+        });
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        
+      }
+    });
+  </script>
+
+</body>
+</html>
