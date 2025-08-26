@@ -45,24 +45,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <tr><td>L</td><td>40</td><td>28</td></tr>
       <tr><td>XL</td><td>42</td><td>29</td></tr>
     `;
-  } else if (type === "TOversize") {
-    desc.innerHTML = `
-      เสื้อ Oversize Cotton 100% C20 นุ่ม ใส่สบาย เสื้ออยู่ทรง<br>
-      สกิน DFT หน้าหลัง ไว้ใส่ไปออกกำลังกาย ใส่ไปกินกาเเฟเเบบเเกงค์แกงค์    `;
-
-    gallery.innerHTML = `
-      <img id="product-img-main" src="img/P3.PNG" alt="สินค้าหลัก">
-      <img src="img/P3.1.PNG" alt="ด้านหลัง">
-      
-    `;
-
-    sizeChart.innerHTML = `
-      <tr><th>ขนาด</th><th>รอบอก (นิ้ว)</th><th>ความยาว (นิ้ว)</th></tr>
-      <tr><td>M</td><td>44</td><td>27</td></tr>
-      <tr><td>L</td><td>48</td><td>29</td></tr>
-      <tr><td>XL</td><td>52</td><td>31</td></tr>
-    `;
-
+ 
   } else if (type === "Raceshirt") {
     desc.innerHTML = `
       เสื้อ 05:30 Raceshirt ใช้เทคโนโลยีเนื้อผ้า Airflow Plus+ ที่มีคุณสมบัติ ระบายอากาศได้ดี แห้งไว ใส่เเล้วรู้สึกเบาสบายตัว
@@ -93,3 +76,4 @@ window.addEventListener("DOMContentLoaded", () => {
   buyBtn.href = `checkout.html?name=${encodeURIComponent(name)}&price=${price}&img=${img}`;
 
 });
+
