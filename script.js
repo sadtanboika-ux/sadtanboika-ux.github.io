@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // ราคา
   if (price) {
     document.getElementById("product-price").textContent =
-      price === "-" ? "Coming Soon" : `฿ ${price}`;
+      price === "-" ? "Pre-Order" : `฿ ${price}`;
   }
 
   // รูปภาพหลัก
@@ -76,4 +76,5 @@ window.addEventListener("DOMContentLoaded", () => {
   buyBtn.href = `checkout.html?name=${encodeURIComponent(name)}&price=${price}&img=${img}`;
 
 });
+
 
