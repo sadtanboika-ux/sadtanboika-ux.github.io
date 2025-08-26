@@ -69,8 +69,8 @@ window.addEventListener("DOMContentLoaded", () => {
       เหมาะสำหรับนักวิ่งขาเเรงทุกคน พร้อมกับ Reflective Flex 05:30 สีเขียวสะท้อนเเสงเเสบตา เเนะนำให้สั่ง Size เล็กกว่าปกติ 1 Size  `;
 
     gallery.innerHTML = `
-      <img id="product-img-main" src="img/product4.1.jpg" alt="สินค้าหลัก">
-      <img src="img/product4.2.jpg" alt="ด้านหลัง">
+      <img id="product-img-main" src="img/product4.2.jpg" alt="สินค้าหลัก">
+      <img src="img/product4.1.jpg" alt="ด้านหลัง">
       
     `;
 
@@ -91,4 +91,5 @@ window.addEventListener("DOMContentLoaded", () => {
   // ปุ่มสั่งซื้อ
   const buyBtn = document.getElementById("buy-button");
   buyBtn.href = `checkout.html?name=${encodeURIComponent(name)}&price=${price}&img=${img}`;
+
 });
